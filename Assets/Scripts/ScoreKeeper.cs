@@ -37,26 +37,10 @@ public class ScoreKeeper : MonoBehaviour
         }
     }
 
-    public void ScoreModifier (int value)
-    {
-        m_KillScore += value;
-    }
-
-    public void ResetScore()
-    {
-        m_Score = 0;
-        m_IsAlive = true;
-    }
-
-    private void OnGameOver()
-    {
-        m_IsAlive = false;
-    }
 
     void Update()
     {
         //int distanceTraveled = m_Distance.GetDistance;
-        //m_Score = distanceTraveled + m_KillScore;
         if (m_IsAlive)
         {
             UpdateScoreByTime();
@@ -76,9 +60,27 @@ public class ScoreKeeper : MonoBehaviour
         }
     }
 
+    public void ScoreModifier(int value)
+    {
+        m_KillScore += value;
+    }
+
+    public void ResetScore()
+    {
+        m_Score = 0;
+        m_KillScore = 0;
+        m_IsAlive = true;
+    }
+
+    private void OnGameOver()
+    {
+        m_IsAlive = false;
+    }
+
     private void OnDestroy()
     {
         GameManager.OnGameStart -= ResetScore;
         GameManager.OnGameOver -= OnGameOver;
     }
+
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BgScroller : MonoBehaviour
@@ -18,12 +16,17 @@ public class BgScroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ScrollBackground();
+    }
+
+    void ScrollBackground()
+    {
         m_Offset = m_MoveSpeed * Time.deltaTime;
         m_Material.mainTextureOffset += m_Offset;
 
         if (m_Material.mainTextureOffset.y >= 1)
         {
-            m_Material.mainTextureOffset = new Vector2 (0,0);
+            m_Material.mainTextureOffset = new Vector2(0, 0);
         }
     }
 }

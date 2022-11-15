@@ -7,9 +7,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int m_MaxHealth;
     [SerializeField] private ParticleSystem m_DeathSpark;
 
-    private CameraShake m_CameraShake;
-    private GameManager m_GameManager;
-
+    private CameraShake m_Camera;
     private SpriteRenderer m_Sprite;
 
     //Getting the Health Value
@@ -18,10 +16,14 @@ public class PlayerHealth : MonoBehaviour
         get { return m_Health; }
     }
 
-    private void Start()
+    public int GetMaxHealth
     {
-        m_GameManager = FindObjectOfType<GameManager>();
-        m_CameraShake = FindObjectOfType<CameraShake>();
+        get { return m_MaxHealth; }
+    }
+
+    private void Awake()
+    {
+        m_Camera = FindObjectOfType<CameraShake>();
         m_Sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -50,8 +52,8 @@ public class PlayerHealth : MonoBehaviour
     {
         Destroy(gameObject);
         Instantiate(m_DeathSpark, transform.position, Quaternion.identity);
-        m_CameraShake.Play();
-        m_GameManager.PlayerDead();
+        m_Camera.Play();
+        GameManager.Instance.PlayerDead();
     }
 
     private IEnumerator ShowDamageEffect()
@@ -60,5 +62,18 @@ public class PlayerHealth : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
         m_Sprite.color = Color.white;
+    }
+
+    //Health Pickup
+    public void GainHealth(int healthPlus)
+    {
+        if (m_Health > m_MaxHealth)
+        {
+            m_Health = m_MaxHealth;
+        }
+        else if (m_Health < m_MaxHealth)
+        {
+            m_Health += healthPlus;
+        }
     }
 }

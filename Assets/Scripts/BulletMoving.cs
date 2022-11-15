@@ -8,11 +8,15 @@ public class BulletMoving : MonoBehaviour
     [SerializeField] private float m_Speed;
     [SerializeField] private int m_LifeSpan;
 
+    private void Start()
+    {
+        FadeOut();
+    }
+
     // Update is called once per frame
     void Update()
     {
         StraightLazer();
-        FadeOut();
     }
 
     void FadeOut()

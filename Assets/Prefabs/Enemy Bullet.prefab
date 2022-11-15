@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8516158843431571452}
   - component: {fileID: 7219671587792198417}
   - component: {fileID: 5493793251739798542}
-  - component: {fileID: -5092722748885333986}
   - component: {fileID: -1287387787097002992}
   m_Layer: 6
   m_Name: Enemy Bullet
@@ -76,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 706b459d758ae2045a067347fa4ed02b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -114,28 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Speed: 5
-  m_LifeSpan: 2
---- !u!50 &-5092722748885333986
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8383674125775641315}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_LifeSpan: 3
+  m_Target: {fileID: 1408213721009739450, guid: 74e60f21b967ef54ba485cab11c220a4, type: 3}
 --- !u!58 &-1287387787097002992
 CircleCollider2D:
   m_ObjectHideFlags: 0

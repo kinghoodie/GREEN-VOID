@@ -8,11 +8,13 @@ public class Health : MonoBehaviour
 
     [SerializeField] private int m_ScoreValue = 100;
     private ScoreKeeper m_ScoreKeeper;
+    private CameraShake m_Camera;
 
     private SpriteRenderer m_Sprite;
 
-    private void Start()
+    private void Awake()
     {
+        m_Camera = FindObjectOfType<CameraShake>();
         m_ScoreKeeper = FindObjectOfType<ScoreKeeper>();
         m_Sprite = GetComponent<SpriteRenderer>();
     }
@@ -48,6 +50,8 @@ public class Health : MonoBehaviour
         m_ScoreKeeper.ScoreModifier(m_ScoreValue);
         Destroy(gameObject);
         Instantiate(m_DeathSpark, transform.position, Quaternion.identity);
+        m_Camera.Play();
+
     }
 
     private IEnumerator ShowDamageEffect()

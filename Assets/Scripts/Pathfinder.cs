@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class Pathfinder : MonoBehaviour
 {
-    EnemySpawner enemySpawner;
+    WaveSpawner enemySpawner;
     private WaveConfig m_waveConfig;
     private List<Transform> m_Waypoints;
-    private int m_WaypointIndex;
+    private int m_WaypointIndex = 0;
 
     void Awake()
     {
-        enemySpawner = FindObjectOfType<EnemySpawner>();
+       // m_waveConfig = FindObjectOfType<WaveConfig>();
+        enemySpawner = FindObjectOfType<WaveSpawner>();
     }
 
     // Start is called before the first frame update
@@ -33,10 +34,11 @@ public class Pathfinder : MonoBehaviour
     {
         if (m_WaypointIndex < m_Waypoints.Count)
         {
-            Vector3 targetPosition = m_Waypoints[m_WaypointIndex].position;
             float delta = m_waveConfig.MoveSpeed() * Time.deltaTime;
-            transform.position = Vector2.MoveTowards (transform.position, targetPosition, delta);
-            
+            Vector3 targetPosition = m_Waypoints[m_WaypointIndex].position;
+
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, delta);
+
             if (transform.position == targetPosition)
             {
                 m_WaypointIndex++;

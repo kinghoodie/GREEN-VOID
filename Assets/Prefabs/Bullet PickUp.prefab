@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5225398601705153616}
   - component: {fileID: 5225398601705153619}
   - component: {fileID: 5225398601705153618}
-  - component: {fileID: 5225398601705153617}
+  - component: {fileID: 2824135216046787465}
   m_Layer: 0
   m_Name: Bullet PickUp
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5225398601705153621}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 8, z: 0}
-  m_LocalScale: {x: 2.066342, y: 2.066342, z: 2.066342}
+  m_LocalScale: {x: 0.65618783, y: 0.65618783, z: 0.65618783}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 9bcde792c39469c4ba26022fb9f8c527, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5cfe594e59ebe0e41a7e36efbc28f8ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,8 +101,8 @@ MonoBehaviour:
   m_CollectedEffect: {fileID: 6388271847842080069, guid: 605378642e77b5a45a02abb580de33f9, type: 3}
   m_Rotation: {x: 0, y: 0, z: 5}
   m_RotationSpeed: 50
---- !u!60 &5225398601705153617
-PolygonCollider2D:
+--- !u!58 &2824135216046787465
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -111,31 +111,9 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8, y: 0.4}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.14999999, y: 0.12}
-      - {x: 0.13, y: 0.099999994}
-      - {x: 0.13, y: 0.07}
-      - {x: 0.13, y: 0.089999996}
-      - {x: 0.07, y: 0.14999999}
-      - {x: -0.19, y: 0.14999999}
-      - {x: -0.28, y: 0.02}
-      - {x: -0.28, y: -0.049999997}
-      - {x: -0.19999999, y: -0.14999999}
-      - {x: 0.24, y: -0.14999999}
-      - {x: 0.28, y: -0.02}
-      - {x: 0.28, y: 0.03}
-      - {x: 0.17, y: 0.13}
+  m_Offset: {x: 0, y: 0.0020424912}
+  serializedVersion: 2
+  m_Radius: 0.6618131

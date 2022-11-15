@@ -5,6 +5,19 @@ public class MainMenu : MonoBehaviour
 {
     public void OnPlay()
     {
-        SceneManager.LoadScene("Game");
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.RestartGame();
+        }
+        else
+        {
+            SceneManager.LoadScene("Game");
+        }
+
+    }
+
+    public void OnQuit()
+    {
+        Application.Quit();
     }
 }

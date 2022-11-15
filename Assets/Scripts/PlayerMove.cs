@@ -5,15 +5,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-    //Player input variables
-    private Vector2 m_RawInput;
-    private int m_BulletSwitch;
-    private Shooter m_Shooter;
-    [SerializeField] private float m_Speed = 0f;
 
-    //Player clamping variables
-    private Vector2 m_MinBound;
-    private Vector2 m_MaxBound;
+    //Player input variables
+    [SerializeField] private float m_Speed = 0f;
+    [SerializeField] private float m_MouseSpeed = 0f;
+    [SerializeField] Rigidbody2D m_Rigid;
+
+    Movement m_Movement;
 
     //Creating Padding
     [Space]
@@ -23,52 +21,30 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float m_PaddingLeft;
     [SerializeField] private float m_PaddingRight;
 
-    private void Awake()
-    {
-        m_Shooter = GetComponent<Shooter>();
-    }
 
     private void Start()
     {
-        SetBounds();
+        GameManager.Instance.RegisterPlayer(this);
+        m_Movement = new Movement(m_Speed, m_Rigid);
     }
 
     void Update()
     {
-        Move();
+        m_Movement.Move(m_MouseSpeed);
+        ClampPositionToCameraViewport();
     }
 
     //User-defined Methods
-    private void Move()
+    private void ClampPositionToCameraViewport()
     {
-        Vector3 delta = m_RawInput * m_Speed * Time.deltaTime;
-        Vector2 playerPos = new Vector2();
+        var cam = Camera.main;
+        Vector2 minPosition = cam.ViewportToWorldPoint(Vector2.zero);
+        Vector2 maxPosition = cam.ViewportToWorldPoint(Vector2.one);
 
-        //Clamping the Player
-        playerPos.x = Mathf.Clamp(transform.position.x + delta.x, m_MinBound.x + m_PaddingLeft, m_MaxBound.x - m_PaddingRight);
-        playerPos.y = Mathf.Clamp(transform.position.y + delta.y, m_MinBound.y + m_PaddingBottom, m_MaxBound.y - m_PaddingTop);
-
-        transform.position = playerPos;
+        var position = transform.position;
+        position.x = Mathf.Clamp(position.x, minPosition.x, maxPosition.x);
+        position.y = Mathf.Clamp(position.y, minPosition.y, maxPosition.y);
+        transform.position = position;
     }
 
-    private void SetBounds()
-    {
-        Camera cam = Camera.main;
-        m_MinBound = cam.ViewportToWorldPoint(new Vector2(0,0));
-        m_MaxBound = cam.ViewportToWorldPoint(new Vector2(1,1));
-    }
-
-    //Input Functions
-    void OnMove (InputValue value)
-    {
-        m_RawInput = value.Get<Vector2>();
-    }
-
-    void OnFire(InputValue value)
-    {
-        if (m_Shooter != null)
-        {
-            m_Shooter.isFiring = value.isPressed;
-        }
-    }
 }

@@ -6,26 +6,21 @@ public class EnemyBulletMoving : MonoBehaviour
 {
     [SerializeField] private float m_Speed;
     [SerializeField] private int m_LifeSpan;
-    private Rigidbody2D m_Rigid;
-    private Vector2 m_StartPos;
-    private PlayerHealth m_Target;
-    private Vector2 m_TargetPos;
+
+    Vector3 m_Target;
+    Vector2 m_Direction;
+
+    private void Awake()
+    {
+        m_Target = GameManager.Instance.GetPlayerPosition();
+    }
 
     private void Start()
     {
-        m_Rigid = GetComponent<Rigidbody2D>();
-        m_Target = FindObjectOfType<PlayerHealth>();
-        if (m_Target == null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        m_StartPos = transform.position;
-        m_TargetPos = m_Target.transform.position;
+        m_Direction = (m_Target - transform.position).normalized * m_Speed;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         StraightLazer();
@@ -39,7 +34,6 @@ public class EnemyBulletMoving : MonoBehaviour
 
     void StraightLazer()
     {
-        var bulletDir = (m_TargetPos - m_StartPos).normalized;
-        m_Rigid.velocity = bulletDir * m_Speed;
+        transform.Translate(m_Direction * Time.deltaTime);
     }
 }

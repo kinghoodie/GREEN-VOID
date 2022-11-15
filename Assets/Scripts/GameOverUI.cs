@@ -13,6 +13,11 @@ public class GameOverUI : MonoBehaviour
         GameManager.OnGameOver += OnPlayerDie;
     }
 
+    private void OnDestroy()
+    {
+        GameManager.OnGameOver -= OnPlayerDie;
+    }
+
     private void OnPlayerDie()
     {
         GameManager.OnGameOver -= OnPlayerDie;
@@ -25,5 +30,13 @@ public class GameOverUI : MonoBehaviour
     public void OnRetryButtonClicked()
     {
         GameManager.Instance.RestartGame();
+        m_MainHolder.SetActive(false);
+    }
+
+    public void OnQuitButtonClicked()
+    {
+        GameManager.Instance.ReturnToMenu();
+        Time.timeScale = 1;
+        m_MainHolder.SetActive(false);
     }
 }
